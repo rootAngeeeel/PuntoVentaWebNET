@@ -1,0 +1,12 @@
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\bin\Debug\net7.0\Modelos.deps.json
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\bin\Debug\net7.0\Modelos.dll
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\bin\Debug\net7.0\Modelos.pdb
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\Modelos.csproj.AssemblyReference.cache
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\Modelos.AssemblyInfoInputs.cache
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\Modelos.AssemblyInfo.cs
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\Modelos.csproj.CoreCompileInputs.cache
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\Modelos.dll
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\refint\Modelos.dll
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\Modelos.pdb
+C:\Users\practicas_ecommerce2\Desktop\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\ref\Modelos.dll

@@ -1,0 +1,204 @@
+﻿@{
+    ViewData["Title"] = "Producto Vista";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <!--Inicio tarjeta-->
+        <div class="card">
+            <div class="card-header">Productos</div>
+            <div class="card-body">
+                <button class="btn btn-success" id="btnNuevoProducto">Nuevo Producto</button>
+                <hr />
+
+                <table class="table table-striped" id="tbProducto">
+                    <thead>
+                        <tr>
+                            <th>ID:</th>
+                            <th>Nombre:</th>
+                            <th>Proveedor:</th>
+                            <th>Descripcion:</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Fin tarjeta-->
+    </div>
+</div>
+
+<!--Inicio Modal Venta -->
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Productos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txtIdProducto" />
+                <div class="mb-2">
+                    <label>Id:</label>
+                    <input type="text" class="form-control" id="txtIDP" />
+                </div>
+                <div class="mb-2">
+                    <label>Nombre:</label>
+                    <input type="text" class="form-control" id="txtNombreProducto" />
+                </div>
+                <div class="mb-2">
+                    <label>Proveedor:</label>
+                    <input type="text" class="form-control" id="txtProveedor" />
+                </div>
+                <div class="mb-2">
+                    <label>Descripcion:</label>
+                    <input type="text" class="form-control" id="txtDescripcion" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnProductoGuardar">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Fin Modal-->
+
+
+@section Scripts{
+    <script>
+        const Producto_base = {
+            id_producto: 0,
+            nombre: "",
+            proveedor: "",
+            descripcion: ""
+        }
+
+        const idProductoBorrar = {
+            id_producto_borrar : 0
+        }
+
+        $(document).ready(() => {
+            verProductos();
+        })
+
+        function borraProducto(id){
+            fetch("/Producto/borrarProducto?id=" + id, {
+                method: "POST"
+            })
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((dataJson) => {
+                    if (dataJson.valor) {
+                        verDetalleVenta();
+                    }
+                })
+        }
+
+        function mostrarProducto(modelo) {
+
+            $("#txtNombreProducto").val(modelo.nombre);
+            $("#txtProveedor").val(modelo.proveedor);
+            $("#txtDescripcion").val(modelo.descripcion);
+
+            $(".modal").modal("show");
+        }
+
+        $("#btnNuevoProducto").click(() => {
+            mostrarProducto(Producto_base);
+            $("#txtIdProducto").val("0");
+        })
+
+        $("#btnProductoGuardar").click(() => {
+            let Nuevo_Producto = Producto_base;
+
+            Nuevo_Producto["nombre"] = $("#txtNombreProducto").val();
+            Nuevo_Producto["proveedor"] = $("#txtProveedor").val();
+            Nuevo_Producto["descripcion"] = $("#txtDescripcion").val();
+
+            if ($("#txtIdProducto").val() == "0") {
+                fetch("/Producto/insertarProducto", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    body: JSON.stringify(Nuevo_Producto)
+                })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+                        if (dataJson.valor) {
+                            alert("Se completo el registro");
+                            $('.modal').modal('Hide');
+                            verProductos();
+                        }
+                    })
+            } else if ($("#txtIdProducto").val() == "1") {
+                fetch("/Producto/actualizarProducto", {
+                    method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    body: JSON.stringify(Nuevo_Producto)
+                })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+                        if (dataJson.valor) {
+                            alert("Se Edito Correctamente");
+                            $('.modal').modal('Hide');
+                            verProductos();
+                        }
+                    })
+            }
+        })
+
+        function verProductos() {
+            fetch("/producto/verProductos")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((dataJson) => {
+                    $("#tbProducto tbody").html("");
+
+                    dataJson.forEach((item) => {
+                        $("#tbProducto tbody").append(
+                            $("<tr>").append(
+                                $("<td>").text(item.id_producto),
+                                $("<td>").text(item.nombre),
+                                $("<td>").text(item.proveedor),
+                                $("<td>").text(item.descripcion),
+                                $("<td>").append(
+                                    $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
+                                    $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.id_producto).text("Eliminar")
+                                )
+                            )
+                        )
+                    })
+                })
+        }
+
+        $("#tbProducto tbody").on("click", ".btn-editar", function () {
+            let ProductoN = $(this).data("modelo")
+            mostrarProducto(ProductoN);
+            $("#txtIdProducto").val("1");
+        })
+
+        $("#tbProducto tbody").on("click", ".btn-eliminar", function () {
+            let idBorraProducto = $(this).data("id");
+            
+            let resultado = window.confirm("¿Desea eliminar el producto?");
+
+            if (resultado) {
+                borraProducto(idBorraProducto);
+            }
+        })
+
+    </script>
+}

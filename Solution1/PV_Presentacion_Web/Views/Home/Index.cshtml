@@ -1,0 +1,217 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <!--Inicio tarjeta-->
+        <div class="card">
+            <div class="card-header">Ventas</div>
+            <div class="card-body">
+
+                <button class="btn btn-success" id="btnNuevaVenta">Nueva Venta</button>
+                <button class="btn btn-success" id="btnNuevoProducto">Productos</button>
+
+                <hr />
+
+                <table class="table table-striped" id="tbDetalleVenta">
+                    <thead>
+                        <tr>
+                            <th>ID:</th>
+                            <th>Descripcion:</th>
+                            <th>Cantidad:</th>
+                            <th>Precio:</th>
+                            <th>Importe:</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <!--Fin tarjeta-->
+
+    </div>
+</div>
+
+
+
+<!--Inicio Modal Venta -->
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalle de Venta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txtBandera" />
+                <div class="mb-2">
+                    <label>Producto</label>
+                    <input type="text" class="form-control" id="txtProducto" />
+
+                    <!--<select name="selectProducto" class="form-select">
+                        <option value="Bujia">Bujia Gonher</option>
+                        <option value="Balata">Balata BOGE</option>
+                        <option value="Junta">Junta Homocinetica Ford</option>
+                        <option value="ArbolLevas">Arbol de Levas</option>
+                    </select>-->
+                </div>
+                <div class="mb-2">
+                    <label>Cantidad</label>
+                    <input type="number" class="form-control" id="txtCantidad" />
+                </div>
+
+                <div class="mb-2">
+                    <label>Precio</label>
+                    <input type="number" class="form-control" id="txtPrecio" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnGuardarVenta">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Fin Modal-->
+
+@section Scripts{
+    <script>
+        const DetalleVenta_base = {
+            idDetalleVenta : 0,
+            idDVenta: 0,
+            descripcion : "",
+            cantidad : 0,
+            precioxPieza : 0,
+            importe: 0
+        }
+
+        $(document).ready(() => {
+            verDetalleVenta();
+        })
+
+        function mostrarVenta(modelo){
+            $("#txtProducto").val(modelo.descripcion);
+            $("#txtCantidad").val(modelo.cantidad);
+            $("#txtPrecio").val(modelo.precioxPieza);
+            
+
+            $(".modal").modal("show");
+        }
+
+        $("#btnNuevaVenta").click(() => {
+            mostrarVenta(DetalleVenta_base);
+            $("#txtBandera").val("0");
+        })
+
+        $("#btnGuardarVenta").click(() => {           
+            let NuevoDetalleVenta = DetalleVenta_base;
+
+            NuevoDetalleVenta["descripcion"] = $("#txtProducto").val();
+            NuevoDetalleVenta["cantidad"] = $("#txtCantidad").val();
+            NuevoDetalleVenta["precioxPieza"] = $("#txtPrecio").val();
+            NuevoDetalleVenta["importe"] = $("#txtCantidad").val() * $("#txtPrecio").val();
+
+            if ($("#txtBandera").val() == "0") {
+                fetch("Home/insertDetalleVenta",{
+                    method : "POST",
+                    headers : {
+                        'Content-Type' : 'application/json; charset=utf-8'
+                    },
+                    body : JSON.stringify(NuevoDetalleVenta)
+                })
+               
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((dataJson) => {
+                    if(dataJson.valor){
+                        alert("Se completo la Venta");
+                        verDetalleVenta();
+                    }
+                })
+            } else if ($("#txtBandera").val() == "1") {
+                fetch("Home/actualizarDetalleVenta", {
+                    method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    body: JSON.stringify(NuevoDetalleVenta)
+                })
+                .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                })
+               .then((dataJson) => {
+                    if (dataJson.valor) {
+                        alert("Se Edito Correctamente");
+                        verDetalleVenta();
+                    }
+               })
+            }
+        })
+
+        function verDetalleVenta(){
+            fetch("Home/verDetalleVenta")
+            .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then((dataJson) => {
+                    $("#tbDetalleVenta tbody").html("");
+                    
+                    dataJson.forEach((item) => {
+                        $("#tbDetalleVenta tbody").append(
+                            $("<tr>").append(
+                                $("<td>").text(item.idDetalleVenta),
+                                $("<td>").text(item.descripcion),
+                                $("<td>").text(item.cantidad),
+                                $("<td>").text(item.precioXPieza),
+                                $("<td>").text(item.importe),
+                                $("<td>").append(
+                                    $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
+                                    $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.idDetalleVenta).text("Eliminar")
+                                )
+                            )
+                        )
+                    })
+            })
+        }
+
+        $("#tbDetalleVenta tbody").on("click", ".btn-editar", function(){
+            let detalleVenta = $(this).data("modelo")
+            mostrarVenta(detalleVenta);
+            $("#txtBandera").val("1");
+        })
+
+        $("#tbDetalleVenta tbody").on("click", ".btn-eliminar", function () {
+            let idDetalleVenta = $(this).data("id")
+
+            let resultado = window.confirm("¿Desea eliminar la venta?");
+
+            if (resultado) {
+                fetch("Home/borrarDetalleVenta?id=" + idDetalleVenta, {
+                    method: "DELETE"
+                })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+
+                        if (dataJson.valor) {
+                            verDetalleVenta();
+                        }
+                    })
+            }
+        })
+
+        document.getElementById("btnNuevoProducto").addEventListener("click", function () {
+            window.location.href = "/Producto/ProductoVista";
+        });
+
+    </script>
+}

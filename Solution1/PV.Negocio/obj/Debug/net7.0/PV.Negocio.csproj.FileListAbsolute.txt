@@ -1,0 +1,12 @@
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\bin\Debug\net7.0\PV.Negocio.deps.json
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\bin\Debug\net7.0\PV.Negocio.dll
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\bin\Debug\net7.0\PV.Negocio.pdb
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\PV.Negocio.csproj.AssemblyReference.cache
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\PV.Negocio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\PV.Negocio.AssemblyInfoInputs.cache
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\PV.Negocio.AssemblyInfo.cs
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\PV.Negocio.csproj.CoreCompileInputs.cache
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\PV.Negocio.dll
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\refint\PV.Negocio.dll
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\PV.Negocio.pdb
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Negocio\obj\Debug\net7.0\ref\PV.Negocio.dll

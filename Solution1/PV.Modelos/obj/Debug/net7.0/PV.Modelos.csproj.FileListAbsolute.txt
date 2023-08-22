@@ -1,0 +1,12 @@
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\bin\Debug\net7.0\PV.Modelos.deps.json
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\bin\Debug\net7.0\PV.Modelos.dll
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\bin\Debug\net7.0\PV.Modelos.pdb
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\PV.Modelos.csproj.AssemblyReference.cache
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\PV.Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\PV.Modelos.AssemblyInfoInputs.cache
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\PV.Modelos.AssemblyInfo.cs
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\PV.Modelos.csproj.CoreCompileInputs.cache
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\PV.Modelos.dll
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\refint\PV.Modelos.dll
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\PV.Modelos.pdb
+C:\Users\solda\OneDrive\Escritorio\Punto_Venta\Solution1\PV.Modelos\obj\Debug\net7.0\ref\PV.Modelos.dll
